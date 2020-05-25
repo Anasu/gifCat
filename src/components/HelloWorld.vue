@@ -1,41 +1,131 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div class="hello">
+        <h3>{{title}}</h3>
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="text-left formulario mx-auto float">
+            <b-form-group
+                id="input-group-1"
+                label="Título"
+                label-for="input-1"
+            >
+                <b-form-input
+                    id="input-1"
+                    v-model="form.title"
+                    required
+                    placeholder="Ingresa texto"
+                ></b-form-input>
+            </b-form-group>
+
+        <b-form-group id="input-group-2" label="Elige un filtro:" label-for="input-2">
+            <b-form-select
+                id="input-2"
+                v-model="form.filter"
+                :options="filters"
+                required
+            ></b-form-select>
+        </b-form-group>
+
+        <b-form-group id="input-group-3" label="Color del texto:" label-for="input-3">
+            <b-form-select
+                id="input-3"
+                v-model="form.color"
+                :options="colors"
+                required
+            ></b-form-select>
+        </b-form-group>
+
+        <b-form-group id="input-group-3" label="Tamaño del texto:" label-for="input-4">
+            <!-- <b-form-select
+                id="input-4"
+                v-model="form.size"
+                :options="sizes"
+                required
+            ></b-form-select> -->
+            <b-form-input
+                    id="input-4"
+                    v-model="form.sizeNum"
+                    required
+                    placeholder="Ingresa Tamaño del texto"
+            ></b-form-input>
+        </b-form-group>
+
+        <div class="d-flex justify-content-center">
+            <b-button type="submit" variant="secondary">Submit</b-button>
+        </div>
+
+        <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
+        </b-form>
+        <b-card class="mt-3" header="Sacame cuando termines">
+            <pre class="m-0">{{ form }}</pre>
+        </b-card>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+    name: 'HelloWorld',
+    props: {
+        msg: String,
+    },
+    data() {
+        return {
+            title: `Generador de gif de gatitos! \\(@^0^@)/`,
+            form: {
+                title: '',
+                filter: null,
+                color: '#FFF',
+                //size: null,
+                sizeNum: '',
+            },
+            filters: [
+                {text: 'Ningún Filtro Seleccionado', value: null}, 
+                {text: 'Borroso', value: 'blur'},
+                {text: 'Monocromático', value: 'mono'}, 
+                {text: 'Sepia', value: 'sepia'}, 
+                {text: 'Negativo', value: 'negative'}, 
+                {text: 'Pintura', value: 'paint'}, 
+                {text: 'Pixeleado', value: 'pixel'}, 
+            ],
+            colors: [
+                {text: 'Blanco', value: '#FFF'}, 
+                {text: 'Negro', value: '#000'},
+                {text: 'Gris', value: '#888'},
+                {text: 'Rojo', value: '#E30B2D'},
+                {text: 'Naranjo', value: '#D95B0B'}, 
+                {text: 'Azul', value: '#0B35D9'}, 
+                {text: 'Verde', value: '#40CC00'}, 
+                {text: 'Amarillo', value: '#E3C20B'}, 
+                {text: 'Morado', value: '#710BE3'}, 
+            ],
+            /* sizes: [
+                {text: 'Elige un tamaño de texto', value: null}, 
+                {text: 'Extra pequeño', value: '16'},
+                {text: 'Pequeño', value: '32'},
+                {text: 'Mediano', value: '48'},
+                {text: 'Grande', value: '64'}, 
+                {text: 'Extra grande', value: '80'}, 
+            ],*/ 
+            show: true
+        }
+    },
+    methods: {
+        onSubmit(evt) {
+            evt.preventDefault()
+            alert(JSON.stringify(this.form))
+        },
+        onReset(evt) {
+            evt.preventDefault()
+            // Reset our form values
+            this.form.email = ''
+            this.form.name = ''
+            this.form.food = null
+            this.form.checked = []
+            // Trick to reset/clear native browser form validation state
+            this.show = false
+            this.$nextTick(() => {
+                this.show = true
+            })
+        }
+    }
 }
 </script>
 
@@ -44,15 +134,14 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.text-left {
+    text-align: left;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.formulario {
+    background-color: rgb(255, 250, 245);
+    margin: 16px;
+    padding: 32px 64px;
+    box-shadow: 2px 4px 6px rgba(128, 128, 128, 0.2);
+    max-width: 600px;
 }
 </style>
