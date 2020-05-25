@@ -3,43 +3,49 @@
         <h3>{{title}}</h3>
         <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="text-left formulario mx-auto float">
             <b-form-group
-            id="input-group-1"
-            label="Título"
-            label-for="input-1"
-        >
-        <b-form-input
-            id="input-1"
-            v-model="form.title"
-            required
-            placeholder="Ingresa texto"
-        ></b-form-input>
-        </b-form-group>
+                id="input-group-1"
+                label="Título"
+                label-for="input-1"
+            >
+                <b-form-input
+                    id="input-1"
+                    v-model="form.title"
+                    required
+                    placeholder="Ingresa texto"
+                ></b-form-input>
+            </b-form-group>
 
         <b-form-group id="input-group-2" label="Elige un filtro:" label-for="input-2">
-        <b-form-select
-            id="input-2"
-            v-model="form.filter"
-            :options="filters"
-            required
-        ></b-form-select>
+            <b-form-select
+                id="input-2"
+                v-model="form.filter"
+                :options="filters"
+                required
+            ></b-form-select>
         </b-form-group>
 
         <b-form-group id="input-group-3" label="Color del texto:" label-for="input-3">
-        <b-form-select
-            id="input-3"
-            v-model="form.color"
-            :options="colors"
-            required
-        ></b-form-select>
+            <b-form-select
+                id="input-3"
+                v-model="form.color"
+                :options="colors"
+                required
+            ></b-form-select>
         </b-form-group>
 
         <b-form-group id="input-group-3" label="Tamaño del texto:" label-for="input-4">
-        <b-form-select
-            id="input-4"
-            v-model="form.size"
-            :options="sizes"
-            required
-        ></b-form-select>
+            <!-- <b-form-select
+                id="input-4"
+                v-model="form.size"
+                :options="sizes"
+                required
+            ></b-form-select> -->
+            <b-form-input
+                    id="input-4"
+                    v-model="form.sizeNum"
+                    required
+                    placeholder="Ingresa Tamaño del texto"
+            ></b-form-input>
         </b-form-group>
 
         <div class="d-flex justify-content-center">
@@ -67,7 +73,8 @@ export default {
                 title: '',
                 filter: null,
                 color: '#FFF',
-                size: null
+                //size: null,
+                sizeNum: '',
             },
             filters: [
                 {text: 'Ningún Filtro Seleccionado', value: null}, 
@@ -89,14 +96,14 @@ export default {
                 {text: 'Amarillo', value: '#E3C20B'}, 
                 {text: 'Morado', value: '#710BE3'}, 
             ],
-            sizes: [
+            /* sizes: [
                 {text: 'Elige un tamaño de texto', value: null}, 
                 {text: 'Extra pequeño', value: '16'},
                 {text: 'Pequeño', value: '32'},
                 {text: 'Mediano', value: '48'},
                 {text: 'Grande', value: '64'}, 
                 {text: 'Extra grande', value: '80'}, 
-            ],
+            ],*/ 
             show: true
         }
     },
