@@ -63,8 +63,7 @@ export default {
             form: {
                 title: '',
                 filter: null,
-                food: null,
-                checked: []
+                color: '#FFF',
             },
             filters: [
                 {text: 'Ningún Filtro Seleccionado', value: null}, 
