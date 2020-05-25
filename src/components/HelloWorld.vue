@@ -33,11 +33,11 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Color del texto:" label-for="input-3">
+      <b-form-group id="input-group-3" label="Tamaño del texto:" label-for="input-4">
         <b-form-select
-          id="input-3"
-          v-model="form.color"
-          :options="colors"
+          id="input-4"
+          v-model="form.size"
+          :options="sizes"
           required
         ></b-form-select>
       </b-form-group>
@@ -64,6 +64,7 @@ export default {
                 title: '',
                 filter: null,
                 color: '#FFF',
+                size: null
             },
             filters: [
                 {text: 'Ningún Filtro Seleccionado', value: null}, 
@@ -84,6 +85,14 @@ export default {
                 {text: 'Verde', value: '#40CC00'}, 
                 {text: 'Amarillo', value: '#E3C20B'}, 
                 {text: 'Morado', value: '#710BE3'}, 
+            ],
+            sizes: [
+                {text: 'Elige un tamaño de texto', value: null}, 
+                {text: 'Extra pequeño', value: '#000'},
+                {text: 'Pequeño', value: '#888'},
+                {text: 'Mediano', value: '#E30B2D'},
+                {text: 'Grande', value: '#D95B0B'}, 
+                {text: 'Extra grande', value: '#0B35D9'}, 
             ],
             show: true
         }
