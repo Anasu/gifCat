@@ -1,54 +1,57 @@
 <template>
-  <div class="hello">
-    <h3>{{title}}</h3>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="text-left formulario mx-auto float">
-      <b-form-group
-        id="input-group-1"
-        label="Título"
-        label-for="input-1"
-      >
+    <div class="hello">
+        <h3>{{title}}</h3>
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="text-left formulario mx-auto float">
+            <b-form-group
+            id="input-group-1"
+            label="Título"
+            label-for="input-1"
+        >
         <b-form-input
-          id="input-1"
-          v-model="form.title"
-          required
-          placeholder="Ingresa texto"
+            id="input-1"
+            v-model="form.title"
+            required
+            placeholder="Ingresa texto"
         ></b-form-input>
-      </b-form-group>
+        </b-form-group>
 
-      <b-form-group id="input-group-2" label="Elige un filtro:" label-for="input-2">
+        <b-form-group id="input-group-2" label="Elige un filtro:" label-for="input-2">
         <b-form-select
-          id="input-2"
-          v-model="form.filter"
-          :options="filters"
-          required
+            id="input-2"
+            v-model="form.filter"
+            :options="filters"
+            required
         ></b-form-select>
-      </b-form-group>
+        </b-form-group>
 
-      <b-form-group id="input-group-3" label="Color del texto:" label-for="input-3">
+        <b-form-group id="input-group-3" label="Color del texto:" label-for="input-3">
         <b-form-select
-          id="input-3"
-          v-model="form.color"
-          :options="colors"
-          required
+            id="input-3"
+            v-model="form.color"
+            :options="colors"
+            required
         ></b-form-select>
-      </b-form-group>
+        </b-form-group>
 
-      <b-form-group id="input-group-3" label="Tamaño del texto:" label-for="input-4">
+        <b-form-group id="input-group-3" label="Tamaño del texto:" label-for="input-4">
         <b-form-select
-          id="input-4"
-          v-model="form.size"
-          :options="sizes"
-          required
+            id="input-4"
+            v-model="form.size"
+            :options="sizes"
+            required
         ></b-form-select>
-      </b-form-group>
+        </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Sacame cuando termines">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
-  </div>
+        <div class="d-flex justify-content-center">
+            <b-button type="submit" variant="secondary">Submit</b-button>
+        </div>
+
+        <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
+        </b-form>
+        <b-card class="mt-3" header="Sacame cuando termines">
+            <pre class="m-0">{{ form }}</pre>
+        </b-card>
+    </div>
 </template>
 
 <script>
@@ -88,11 +91,11 @@ export default {
             ],
             sizes: [
                 {text: 'Elige un tamaño de texto', value: null}, 
-                {text: 'Extra pequeño', value: '#000'},
-                {text: 'Pequeño', value: '#888'},
-                {text: 'Mediano', value: '#E30B2D'},
-                {text: 'Grande', value: '#D95B0B'}, 
-                {text: 'Extra grande', value: '#0B35D9'}, 
+                {text: 'Extra pequeño', value: '16'},
+                {text: 'Pequeño', value: '32'},
+                {text: 'Mediano', value: '48'},
+                {text: 'Grande', value: '64'}, 
+                {text: 'Extra grande', value: '80'}, 
             ],
             show: true
         }
@@ -134,5 +137,4 @@ h3 {
     box-shadow: 2px 4px 6px rgba(128, 128, 128, 0.2);
     max-width: 600px;
 }
-
 </style>
