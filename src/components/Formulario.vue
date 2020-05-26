@@ -57,7 +57,15 @@
         <!-- <b-card class="mt-3" header="Sacame cuando termines">
             <pre class="m-0">{{ form }}</pre>
         </b-card> -->
-
+        <b-card
+            title=""
+            img-src="https://picsum.photos/600/300/?image=25"
+            img-alt="Image"
+            img-top
+            tag="article"
+            
+            class="mb-2 mx-auto float w-75"
+        ></b-card>
 
     </div>
 </template>
@@ -130,6 +138,7 @@ export default {
         },
         displayGif(url) {
             console.log(`El link de ajax desde displayGif es ${url}`)
+            return url
         },
     }
 }
