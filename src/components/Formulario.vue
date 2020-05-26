@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <h3>{{title}}</h3>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="text-left formulario mx-auto float">
+        <b-form @submit="onSubmit" v-if="show" class="text-left formulario mx-auto float">
             <b-form-group
                 id="input-group-1"
                 label="Título"
@@ -10,7 +10,6 @@
                 <b-form-input
                     id="input-1"
                     v-model="form.title"
-                    required
                     placeholder="Ingresa texto"
                 ></b-form-input>
             </b-form-group>
@@ -20,7 +19,6 @@
                 id="input-2"
                 v-model="form.filter"
                 :options="filters"
-                required
             ></b-form-select>
         </b-form-group>
 
@@ -29,7 +27,6 @@
                 id="input-3"
                 v-model="form.color"
                 :options="colors"
-                required
             ></b-form-select>
         </b-form-group>
 
@@ -43,7 +40,6 @@
             <b-form-input
                     id="input-4"
                     v-model="form.sizeNum"
-                    required
                     placeholder="Ingresa Tamaño del texto"
             ></b-form-input>
         </b-form-group>
@@ -57,14 +53,23 @@
         <!-- <b-card class="mt-3" header="Sacame cuando termines">
             <pre class="m-0">{{ form }}</pre>
         </b-card> -->
-
+        <b-card
+            title=""
+            :img-src="gifURL"
+            img-alt="Image"
+            img-top
+            tag="article"
+            
+            class="mb-2 mx-auto float w-75"
+        ></b-card>
 
     </div>
 </template>
 
+
 <script>
 export default {
-    name: 'HelloWorld',
+    name: 'Formulario',
     props: {
         msg: String,
     },
@@ -74,8 +79,7 @@ export default {
             form: {
                 title: '',
                 filter: null,
-                color: '#FFF',
-                //size: null,
+                color: '%23FFF',
                 sizeNum: '',
             },
             filters: [
@@ -88,50 +92,47 @@ export default {
                 {text: 'Pixeleado', value: 'pixel'}, 
             ],
             colors: [
-                {text: 'Blanco', value: '#FFF'}, 
-                {text: 'Negro', value: '#000'},
-                {text: 'Gris', value: '#888'},
-                {text: 'Rojo', value: '#E30B2D'},
-                {text: 'Naranjo', value: '#D95B0B'}, 
-                {text: 'Azul', value: '#0B35D9'}, 
-                {text: 'Verde', value: '#40CC00'}, 
-                {text: 'Amarillo', value: '#E3C20B'}, 
-                {text: 'Morado', value: '#710BE3'}, 
+                {text: 'Blanco', value: '%23FFF'}, 
+                {text: 'Negro', value: '%23000'},
+                {text: 'Gris', value: '%23888'},
+                {text: 'Rojo', value: '%23E30B2D'},
+                {text: 'Naranjo', value: '%23D95B0B'}, 
+                {text: 'Azul', value: '%230B35D9'}, 
+                {text: 'Verde', value: '%2340CC00'}, 
+                {text: 'Amarillo', value: '%23E3C20B'}, 
+                {text: 'Morado', value: '%23710BE3'}, 
             ],
-            /* sizes: [
-                {text: 'Elige un tamaño de texto', value: null}, 
-                {text: 'Extra pequeño', value: '16'},
-                {text: 'Pequeño', value: '32'},
-                {text: 'Mediano', value: '48'},
-                {text: 'Grande', value: '64'}, 
-                {text: 'Extra grande', value: '80'}, 
-            ],*/ 
-            show: true
+            show: true,
+            gifURL: 'https://picsum.photos/600/300/?image=23',
+
         }
     },
     methods: {
-                onSubmit(evt) {
+        onSubmit(evt) {
             evt.preventDefault()
             // alert(JSON.stringify(this.form))
-            this.displayGif(`https://cataas.com/cat/gif/says/${this.form.title}?filter=${this.form.filter}&color=${this.form.color}&size=${this.form.size}`)
+            this.displayGif(this.form.title, this.form.filter, this.form.color, this.form.sizeNum)
         },
-        onReset(evt) {
-            evt.preventDefault()
-            // Reset our form values
-            this.form.email = ''
-            this.form.name = ''
-            this.form.food = null
-            this.form.checked = []
-            // Trick to reset/clear native browser form validation state
-            this.show = false
-            this.$nextTick(() => {
-                this.show = true
-            })
+        displayGif(title, filter, color, size) {
+
+            const gifApiCall = async (t, f, c, s) => {
+                console.log(this.gifURL)
+                try {
+                    let fetchURL = `https://cataas.com/cat/gif/says/${t}?filter=${f}&color=${c}&size=${s}`;
+                    let res = await fetch(fetchURL);
+                    console.log(`la url es ${res.url}`);
+                    if(res.status === 200) {
+                        this.gifURL = res.url;
+                        console.log(`la url está correcta`)
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            this.gifURL = gifApiCall(title, filter, color, size)
+            console.log(this.gifURL)
         },
-        displayGif(url) {
-            console.log(`El link de ajax desde displayGif es ${url}`)
-        },
-    }
+    },
 }
 </script>
 
