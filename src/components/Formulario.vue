@@ -10,7 +10,6 @@
                 <b-form-input
                     id="input-1"
                     v-model="form.title"
-                    required
                     placeholder="Ingresa texto"
                 ></b-form-input>
             </b-form-group>
@@ -20,7 +19,6 @@
                 id="input-2"
                 v-model="form.filter"
                 :options="filters"
-                required
             ></b-form-select>
         </b-form-group>
 
@@ -29,7 +27,6 @@
                 id="input-3"
                 v-model="form.color"
                 :options="colors"
-                required
             ></b-form-select>
         </b-form-group>
 
@@ -43,7 +40,6 @@
             <b-form-input
                     id="input-4"
                     v-model="form.sizeNum"
-                    required
                     placeholder="Ingresa Tamaño del texto"
             ></b-form-input>
         </b-form-group>
@@ -69,6 +65,7 @@
 
     </div>
 </template>
+
 
 <script>
 export default {
@@ -111,29 +108,31 @@ export default {
         }
     },
     methods: {
-                onSubmit(evt) {
+        onSubmit(evt) {
             evt.preventDefault()
             // alert(JSON.stringify(this.form))
-            this.displayGif(`https://cataas.com/cat/gif/says/${this.form.title}?filter=${this.form.filter}&color=${this.form.color}&size=${this.form.size}`)
+            this.displayGif(this.form.title, this.form.filter, this.form.color, this.form.sizeNum)
         },
-        onReset(evt) {
-            evt.preventDefault()
-            // Reset our form values
-            this.form.email = ''
-            this.form.name = ''
-            this.form.food = null
-            this.form.checked = []
-            // Trick to reset/clear native browser form validation state
-            this.show = false
-            this.$nextTick(() => {
-                this.show = true
-            })
+        displayGif(title, filter, color, size) {
+
+            const gifApiCall = async (t, f, c, s) => {
+                console.log(this.gifURL)
+                try {
+                    let fetchURL = `https://cataas.com/cat/gif/says/${t}?filter=${f}&color=${c}&size=${s}`;
+                    let res = await fetch(fetchURL);
+                    console.log(`la url es ${res.url}`);
+                    if(res.status === 200) {
+                        this.gifURL = res.url;
+                        console.log(`la url está correcta`)
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            this.gifURL = gifApiCall(title, filter, color, size)
+            console.log(this.gifURL)
         },
-        displayGif(url) {
-            console.log(`El link de ajax desde displayGif es ${url}`)
-            return url
-        },
-    }
+    },
 }
 </script>
 
