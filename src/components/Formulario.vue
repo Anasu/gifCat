@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <h3>{{title}}</h3>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="text-left formulario mx-auto float">
+        <b-form @submit="onSubmit" v-if="show" class="text-left formulario mx-auto float">
             <b-form-group
                 id="input-group-1"
                 label="Título"
