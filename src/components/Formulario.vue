@@ -49,14 +49,16 @@
         </b-form-group>
 
         <div class="d-flex justify-content-center">
-            <b-button type="submit" variant="secondary">Submit</b-button>
+            <b-button type="submit" variant="success">Submit</b-button>
         </div>
-
         <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
         </b-form>
-        <b-card class="mt-3" header="Sacame cuando termines">
+
+        <!-- <b-card class="mt-3" header="Sacame cuando termines">
             <pre class="m-0">{{ form }}</pre>
-        </b-card>
+        </b-card> -->
+
+
     </div>
 </template>
 
@@ -108,9 +110,10 @@ export default {
         }
     },
     methods: {
-        onSubmit(evt) {
+                onSubmit(evt) {
             evt.preventDefault()
-            alert(JSON.stringify(this.form))
+            // alert(JSON.stringify(this.form))
+            this.displayGif(`https://cataas.com/cat/gif/says/${this.form.title}?filter=${this.form.filter}&color=${this.form.color}&size=${this.form.size}`)
         },
         onReset(evt) {
             evt.preventDefault()
@@ -124,7 +127,10 @@ export default {
             this.$nextTick(() => {
                 this.show = true
             })
-        }
+        },
+        displayGif(url) {
+            console.log(`El link de ajax desde displayGif es ${url}`)
+        },
     }
 }
 </script>
