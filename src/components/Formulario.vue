@@ -59,7 +59,7 @@
         </b-card> -->
         <b-card
             title=""
-            img-src="https://picsum.photos/600/300/?image=25"
+            :img-src="gifURL"
             img-alt="Image"
             img-top
             tag="article"
@@ -72,7 +72,7 @@
 
 <script>
 export default {
-    name: 'HelloWorld',
+    name: 'Formulario',
     props: {
         msg: String,
     },
@@ -82,8 +82,7 @@ export default {
             form: {
                 title: '',
                 filter: null,
-                color: '#FFF',
-                //size: null,
+                color: '%23FFF',
                 sizeNum: '',
             },
             filters: [
@@ -106,15 +105,9 @@ export default {
                 {text: 'Amarillo', value: '%23E3C20B'}, 
                 {text: 'Morado', value: '%23710BE3'}, 
             ],
-            /* sizes: [
-                {text: 'Elige un tamaño de texto', value: null}, 
-                {text: 'Extra pequeño', value: '16'},
-                {text: 'Pequeño', value: '32'},
-                {text: 'Mediano', value: '48'},
-                {text: 'Grande', value: '64'}, 
-                {text: 'Extra grande', value: '80'}, 
-            ],*/ 
-            show: true
+            show: true,
+            gifURL: 'https://picsum.photos/600/300/?image=23',
+
         }
     },
     methods: {
